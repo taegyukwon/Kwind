@@ -39,6 +39,53 @@ def detail_menu(menu):
         basket_menu[menu] = order_number
         print('정상적으로 담겼습니다.')
 
+#장바구니 삭제 함수
+def delete_basket():
+    selected_item_dic = {}
+    print('삭제하실 항목을 골라주세요.')
+    for num, key in enumerate(basket_menu, 1):
+        selected_item_dic[num] = key
+        print(f"{num}. {key}")
+    select_number = int(input(": "))
+    del basket_menu[selected_item_dic[select_number]]
+    print("정상적으로 삭제가 되었습니다.")
+
+#장바구니 초기화 함수
+def delete_all():
+    basket_menu.clear()
+    print("장바구니가 초기화 되었습니다.")
+
+#장바구니 목록 보기 함수
+def show_basket():
+    if not basket_menu:
+        print("장바구니가 비어있습니다.")
+        print("")
+        return
+    for num, key in enumerate(basket_menu, 1):
+        print(f"{num}. {key} - {item_dict[key][0]:n} X {basket_menu[key]}")
+        # amout_price = item_dict[key][0] * basket_menu[key]
+        # print(f"{num}. {item_dict[key]}의 {basket_menu[key]} 총 가격은 {amount_price:n}")
+    print("")
+    print("1. 결제하러가기")
+    print("2. 메뉴 추가하러 가기")
+    print("3. 장바구니 메뉴 삭제하기")
+    print("4. 장바구니 초기화 하기")
+    print("0. 메인으로 가기")
+    select_number = int(input(": "))
+    if select_number == 1:
+        pay()
+    elif select_number == 2:
+        show_menu()
+    elif select_number == 3: 
+        delete_basket()
+    elif select_number == 4:
+        delete_all()
+    elif select_number == 0:
+        return
+    else:
+        print("번호를 잘못 입력했습니다.")
+        show_basket()
+
 basket_menu = {}
 item_dict = {
     '김치찌개': (5000, '고기와 국산 김치를 우려서 만든 김치찌개입니다.'),
