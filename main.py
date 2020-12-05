@@ -86,6 +86,23 @@ def show_basket():
         print("번호를 잘못 입력했습니다.")
         show_basket()
 
+#결제하기 함수 
+def pay():
+    total = 0
+    for num, key in enumerate(basket_menu, 1):
+        print(f"{num}. {key} - {item_dict[key][0]:n} X {basket_menu[key]}")
+        amount_price = item_dict[key][0] * basket_menu[key]
+        total += amount_price
+    print(f"결제하실 금액은 {total:n}입니다.")
+    print("결제를 완료하시려면 1번, 메인으로 돌아가시려면 0번을 입력해주세요.")
+    select_number = int(input(": "))
+    if select_number == 0:
+        return
+    elif select_number == 1:
+        print("정상적으로 결제가 완료 되었습니다.")
+        end_pro()
+
+
 basket_menu = {}
 item_dict = {
     '김치찌개': (5000, '고기와 국산 김치를 우려서 만든 김치찌개입니다.'),
